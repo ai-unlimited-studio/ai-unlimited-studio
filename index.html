@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>AI Unlimited Studio</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#080b14;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  padding:22px 18px;
+  text-align:center;
+  background:linear-gradient(135deg,#111936,#17102d);
+  border-bottom:1px solid #252b4b;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:800;
+}
+
+.subtitle{
+  color:#aeb7d8;
+  margin-top:7px;
+  font-size:14px;
+}
+
+.container{
+  padding:18px;
+  max-width:650px;
+  margin:auto;
+}
+
+.hero{
+  padding:20px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#171d3b,#21152f);
+  margin-bottom:18px;
+}
+
+.hero h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:#b9c0d8;
+  font-size:14px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.card{
+  min-height:125px;
+  border:1px solid #292f50;
+  border-radius:18px;
+  padding:18px;
+  background:#111626;
+  color:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.icon{
+  font-size:35px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-size:16px;
+}
+
+.card p{
+  color:#8f99bb;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.back{
+  border:0;
+  background:#1c2440;
+  color:white;
+  padding:10px 14px;
+  border-radius:10px;
+  margin-bottom:16px;
+}
+
+textarea,input,select{
+  width:100%;
+  padding:14px;
+  margin:8px 0 14px;
+  border-radius:12px;
+  border:1px solid #303858;
+  background:#0d1220;
+  color:white;
+  outline:none;
+}
+
+button.main{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:13px;
+  background:linear-gradient(90deg,#6d5dfc,#a855f7);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.preview{
+  margin-top:18px;
+  min-height:160px;
+  border-radius:16px;
+  border:1px dashed #3b4469;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#858eae;
+  text-align:center;
+  padding:20px;
+}
+
+.game{
+  margin-top:15px;
+  background:#0d1220;
+  border:1px solid #303858;
+  border-radius:18px;
+  padding:15px;
+  text-align:center;
+}
+
+#gameArea{
+  width:100%;
+  height:300px;
+  background:#080b14;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:15px;
+}
+
+.player{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#8b5cf6;
+  position:absolute;
+  left:45%;
+  top:45%;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(3,60px);
+  justify-content:center;
+  gap:7px;
+}
+
+.controls button{
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#252e50;
+  color:white;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#101525;
+  border-top:1px solid #292f50;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 5px;
+}
+
+.bottom button{
+  background:none;
+  border:0;
+  color:#9da7c7;
+  font-size:11px;
+}
+
+.bottom span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.space{
+  height:75px;
+}
+
+img.result{
+  max-width:100%;
+  border-radius:14px;
+  margin-top:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✨ AI Unlimited Studio</div>
+  <div class="subtitle">Create • Imagine • Play</div>
+</header>
+
+<main class="container">
+
+<section id="home" class="page active">
+
+<div class="hero">
+<h2>Welcome 👋</h2>
+<p>Create videos, images, music and games from one mobile-friendly app.</p>
+</div>
+
+<div class="grid">
+
+<div class="card" onclick="openPage('video')">
+<div class="icon">🎬</div>
+<h3>AI Video</h3>
+<p>Text & Image to Video</p>
+</div>
+
+<div class="card" onclick="openPage('image')">
+<div class="icon">🖼️</div>
+<h3>AI Image</h3>
+<p>Create images</p>
+</div>
+
+<div class="card" onclick="openPage('music')">
+<div class="icon">🎵</div>
+<h3>AI Music</h3>
+<p>Create music ideas</p>
+</div>
+
+<div class="card" onclick="openPage('voice')">
+<div class="icon">🎙️</div>
+<h3>AI Voice</h3>
+<p>Text to voice</p>
+</div>
+
+<div class="card" onclick="openPage('game')">
+<div class="icon">🎮</div>
+<h3>AI Games</h3>
+<p>Play mini games</p>
+</div>
+
+<div class="card" onclick="openPage('gallery')">
+<div class="icon">📁</div>
+<h3>Gallery</h3>
+<p>Your creations</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="video" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>🎬 AI Video</h2>
+
+<textarea id="videoPrompt"
+placeholder="Example: A realistic village boy riding a motorcycle..."></textarea>
+
+<select>
+<option>9:16 Shorts</option>
+<option>16:9 Landscape</option>
+<option>1:1 Square</option>
+</select>
+
+<button class="main" onclick="demo('videoPreview')">
+Generate Video
+</button>
+
+<div id="videoPreview" class="preview">
+Video generation provider not connected yet.
+</div>
+</section>
+
+
+<section id="image" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>🖼️ AI Image</h2>
+
+<textarea id="imagePrompt"
+placeholder="Describe the image you want..."></textarea>
+
+<select>
+<option>9:16</option>
+<option>1:1</option>
+<option>16:9</option>
+</select>
+
+<button class="main" onclick="demo('imagePreview')">
+Generate Image
+</button>
+
+<div id="imagePreview" class="preview">
+Image generation provider not connected yet.
+</div>
+</section>
+
+
+<section id="music" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>🎵 AI Music</h2>
+
+<textarea placeholder="Example: Emotional cinematic village music..."></textarea>
+
+<button class="main" onclick="demo('musicPreview')">
+Generate Music
+</button>
+
+<div id="musicPreview" class="preview">
+Music provider not connected yet.
+</div>
+</section>
+
+
+<section id="voice" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>🎙️ AI Voice</h2>
+
+<textarea id="voiceText"
+placeholder="अपना dialogue यहाँ लिखें..."></textarea>
+
+<select>
+<option>Hindi</option>
+<option>English</option>
+</select>
+
+<button class="main" onclick="speakText()">
+🔊 Generate Voice
+</button>
+
+<div class="preview">
+आपके फोन का built-in speech engine demo के लिए इस्तेमाल होगा।
+</div>
+</section>
+
+
+<section id="game" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>🎮 Mini Game</h2>
+
+<div class="game">
+
+<div id="gameArea">
+<div id="player" class="player"></div>
+</div>
+
+<p>Score: <b id="score">0</b></p>
+
+<br>
+
+<div class="controls">
+<div></div>
+<button onclick="move(0,-15)">⬆️</button>
+<div></div>
+
+<button onclick="move(-15,0)">⬅️</button>
+<button onclick="move(0,15)">⬇️</button>
+<button onclick="move(15,0)">➡️</button>
+</div>
+
+<br>
+
+<button class="main" onclick="resetGame()">Restart</button>
+
+</div>
+</section>
+
+
+<section id="gallery" class="page">
+<button class="back" onclick="openPage('home')">← Back</button>
+
+<h2>📁 Gallery</h2>
+
+<div id="galleryBox" class="preview">
+Your creations will appear here.
+</div>
+</section>
+
+</main>
+
+<div class="space"></div>
+
+<nav class="bottom">
+<button onclick="openPage('home')">
+<span>🏠</span>Home
+</button>
+
+<button onclick="openPage('video')">
+<span>✨</span>Create
+</button>
+
+<button onclick="openPage('gallery')">
+<span>📁</span>Gallery
+</button>
+
+<button onclick="openPage('game')">
+<span>🎮</span>Games
+</button>
+</nav>
+
+
+<script>
+
+function openPage(id){
+
+document.querySelectorAll('.page')
+.forEach(p=>p.classList.remove('active'));
+
+document.getElementById(id)
+.classList.add('active');
+
+window.scrollTo(0,0);
+}
+
+
+function demo(id){
+
+document.getElementById(id).innerHTML =
+"⏳ Demo mode<br><br>" +
+"This feature is ready for a real AI provider.";
+}
+
+
+function speakText(){
+
+let text=document.getElementById("voiceText").value;
+
+if(!text){
+alert("पहले text लिखो");
+return;
+}
+
+if("speechSynthesis" in window){
+
+let speech=new SpeechSynthesisUtterance(text);
+
+speech.lang="hi-IN";
+
+speechSynthesis.speak(speech);
+
+}else{
+
+alert("इस browser में voice support नहीं है.");
+
+}
+
+}
+
+
+let x=45;
+let y=45;
+let score=0;
+
+function move(dx,dy){
+
+x+=dx/3;
+y+=dy/3;
+
+x=Math.max(0,Math.min(92,x));
+y=Math.max(0,Math.min(88,y));
+
+document.getElementById("player").style.left=x+"%";
+document.getElementById("player").style.top=y+"%";
+
+score++;
+
+document.getElementById("score").innerText=score;
+}
+
+
+function resetGame(){
+
+x=45;
+y=45;
+score=0;
+
+document.getElementById("player").style.left=x+"%";
+document.getElementById("player").style.top=y+"%";
+
+document.getElementById("score").innerText=score;
+
+}
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="ArrowUp") move(0,-15);
+if(e.key==="ArrowDown") move(0,15);
+if(e.key==="ArrowLeft") move(-15,0);
+if(e.key==="ArrowRight") move(15,0);
+
+});
+
+</script>
+
+</body>
+</html>
